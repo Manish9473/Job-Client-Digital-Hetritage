@@ -39,8 +39,9 @@ con.on('open',()=>{
 })
 
 
-app.get('/', (req, res) => {
-  res.send(json)
+app.get('/getimage/:img', (req, res) => {
+  res.sendFile('C:/Users/hp/Desktop/BTP20/Backend/uploads/'+req.params.img)
+  //window.localStorage.setItem('name','manish')
 })
 
 app.post('/savejob',upload.single("image"),async (req,res)=>
@@ -82,17 +83,17 @@ app.post('/login', async (req,res) =>{
   //console.log(user[0].pass,req.body.password)
   if(user.length==0)
   {
-    res.send("500")
+    res.send({status:"500"})
   }
   else
   {
     if(user[0].pass==req.body.password && user[0].usertype==="Provider")
-    res.send("200")
+    res.send({status:"200",id:user[0]._id})
     else
       if(user[0].pass==req.body.password && user[0].usertype==="Client")
-      res.send("201")
+      res.send({status:"201"})
     else
-    res.send("400")
+    res.send({status:"400"})
   }
   
 

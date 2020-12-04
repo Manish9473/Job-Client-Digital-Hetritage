@@ -22,16 +22,18 @@ class Login extends Component {
     
     const response=axios.post('http://localhost:3001/login', this.state)
       .then(response => {
-        if(response.data===201){
+        console.log(response.data)
+        if(response.data.status==="201"){
           this.props.history.push('/clientpage')
         }
-        if(response.data===200){
+        if(response.data.status==="200"){
           this.props.history.push('/providerpage')
+          window.localStorage.setItem('id',response.data.id)
         }
-        if(response.data===400){
+        if(response.data.status==="400"){
           alert("Email id password not matched")
         }
-        if(response.data===500){
+        if(response.data.status==="500"){
           alert("Username not found")
         }
       })

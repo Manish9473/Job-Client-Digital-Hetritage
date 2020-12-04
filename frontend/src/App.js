@@ -7,7 +7,7 @@ import Login from "./login"
 import Register from './register'
 import Clientpage from './clientpage';
 import Providerpage from './providerpage';
-
+import Jobpage from './jobpage'
 
 class App extends Component {
 
@@ -21,6 +21,7 @@ class App extends Component {
           <Route exact  path='/register' component={Register} />
           <Route exact  path='/clientpage' component={Clientpage} />
           <Route exact  path='/providerpage' component={Providerpage} />
+          <Route exact  path='/jobpage' component={Jobpage}/>
 
         
             

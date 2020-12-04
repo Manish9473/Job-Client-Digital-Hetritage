@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 import axios from 'axios'
 
-const num=[1,2,3,4,5,6]
+
 class Clientpage extends Component{
     constructor(props)
     {   super(props);
@@ -28,7 +28,7 @@ class Clientpage extends Component{
         return(
             
             <ul>
-                {this.state.jobs.map(x => <li>Title:{x.title} Jobtype:{x.jobtype}<button>Open</button></li>)}
+                {this.state.jobs.map(x => <li>Title:{x.title} Jobtype:{x.jobtype}<button onClick={()=>this.props.history.push('/jobpage',{id:x._id,title:x.title,img:x.img,description:x.description})}>Open</button></li>)}
                 {/* Jobs:{this.state.jobs} */}
             </ul>
         )
