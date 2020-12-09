@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './App.css';
+import './home.css';
 import {BrowserRouter as Router,Switch,Link} from 'react-router-dom';
 import Route from 'react-router-dom/Route';
 import Login from "./login"
@@ -14,6 +14,7 @@ class Home extends Component {
         
         <button onClick={()=> this.props.history.push('/register')}>Register</button>
         <button onClick={()=> this.props.history.push('/login')}>Login</button>
+        <button >Admin</button>
         
       </Router>
     );

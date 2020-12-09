@@ -7,7 +7,8 @@ const multer=require('multer')
 const path=require('path')
 const url= 'mongodb://localhost/btp20'
 const userSchema=require('./user')
-const jobSchema=require('./jobs')
+const jobSchema=require('./jobs');
+const { ObjectId } = require('mongodb');
 
 
 app.use(
@@ -50,8 +51,8 @@ app.post('/savejob',upload.single("image"),async (req,res)=>
      title:req.body.title,
      description:req.body.description,
      jobtype:req.body.jobtype,
-     img:req.file.originalname
-
+     img:req.file.originalname,
+     user_id:req.body.user_id
    })
    try{
 
@@ -69,13 +70,52 @@ app.post('/savejob',upload.single("image"),async (req,res)=>
 })
 
 
-app.get('/getjobs',async (req,res)=>{
-
-  const jobs=await jobSchema.find()
+app.get('/getjobs/:user_id',async (req,res)=>{
+  var jobs= await jobSchema.find({'user_id':req.params.user_id})
   res.send(jobs)
   res.end()
 })
 
+app.get('/getalljobs/:user_id',async (req,res)=>{
+  const jobs= await jobSchema.find()
+  var newjobs=[];
+  for(var i=0;i<jobs.length;i++)
+  {
+    var f=0;
+    for(var j=0;j<jobs[i].soln.length;j++)
+    {
+      if(jobs[i].soln[j].user_id===req.params.user_id)
+      {
+        f=1;
+        break;
+      }
+    }
+    if(f==0)
+    {
+      newjobs.push(jobs[i])
+    }
+    
+  }
+  console.log(newjobs)
+  res.send(newjobs)
+  res.end()
+})
+
+app.post('/deletejob',async (req,res)=>{
+ await jobSchema.remove({'_id':ObjectId(req.body.id)})
+ res.send("deleted")
+ res.end()
+})
+
+app.post('/savesoln',async (req,res)=>{
+  
+  // await job.soln.push(req.body)
+  // await job.save()
+  //console.log(req.body)
+  await jobSchema.updateOne({'_id':req.body.job_id},{$push:{soln:{user_id:req.body.user_id,answer:req.body.answer}}})
+  res.send("Updated")
+  res.end()
+})
 
 app.post('/login', async (req,res) =>{
 
@@ -91,7 +131,7 @@ app.post('/login', async (req,res) =>{
     res.send({status:"200",id:user[0]._id})
     else
       if(user[0].pass==req.body.password && user[0].usertype==="Client")
-      res.send({status:"201"})
+      res.send({status:"201",id:user[0]._id})
     else
     res.send({status:"400"})
   }
@@ -135,7 +175,14 @@ else{
   
   })
 
+app.get('/userdetails/:id',async (req,res)=>{
 
+  const user= await userSchema.find({"_id":req.params.id})
+  res.send({name:user[0].name,email:user[0].email})
+  res.end()
+
+
+})
 
 app.listen(port, () => {
   console.log(`listening at http://localhost:${port}`)

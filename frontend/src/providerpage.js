@@ -4,55 +4,55 @@ import axios from 'axios'
 
 
 class Providerpage extends Component{
-    img_src=''
-    state={
-        img:null,
-        description:String,
-        title:String
+    constructor(props)
+    {   super(props);
+         this.state={
+            jobs:[]
+            }
     }
 
+    deletejob(id){
+        axios.post('http://localhost:3001/deletejob/',{'id':id})
+        .then(this.setState({jobs:[]}))
+    }
 
-    handlesubmit(event)
-    {
-        console.log(this.state)
-        const data=new FormData()
+    componentDidMount(){
+
         
-        data.append('title',this.state.title)
-        data.append('description',this.state.description)
-        data.append('jobtype','description')
-        data.append('image',this.state.img)
-        const res=axios.post('http://localhost:3001/savejob',data)
-        .then(res=>{console.log(res)})
-
-        console.log(data)
+        axios.get('http://localhost:3001/getjobs/' + window.localStorage.getItem('user_id'))
+        .then(
+            response=>{this.setState({jobs:response.data})
+            // console.log(json.data)
+        }
+        )
 
     }
 
     render(){
-        
+        console.log(this.state.jobs)
+        if(this.state.jobs.length>0)
         return(
-            <div className="Add Job">
-                <h1>Add a Job</h1>
-                <label>
-                    Title
-                <input type="text" value={this.state.title} onChange = {(event)=>{this.setState({title:event.target.value})}}/>
-                </label>
-                <label>
-                    Description
-                     <textarea value={this.state.description} onChange = {(event)=>{this.setState({description:event.target.value})}} width="400" height="200"></textarea>
-                </label>
-                <label>
-                    Image upload
-                <input type="file" accept="image/x-png,image/gif,image/jpeg" onChange = {(event)=>{this.setState({img:event.target.files[0]})
-                 if(event.target.files!=null)
-                 this.img_src=URL.createObjectURL(event.target.files[0])}}/>
-                <img src={this.img_src} width="500" height="600"></img>
-                </label>
-                <label>
-                    Submit
-                    <button on onClick={this.handlesubmit.bind(this)}>Submit</button>
-                </label>
+            <div className='Jobs'>
+                <button onClick={()=>{this.props.history.push('/job1add')}}>Get descryption of Images</button>
+                <button onClick={()=>{this.props.history.push('/job1add')}}>Get Images of events</button>
+                <button onClick={()=>{this.props.history.push('/job1add')}}>Annotate and write descyption</button>
                 
+                <h1>Jobs are</h1>
+                <ul>
+                    {this.state.jobs.map(x => <li>Title:{x.title} Jobtype:{x.jobtype}
+                    <button onClick={()=>this.props.history.push('/job1soln',{soln:x.soln})}>Solutions</button> 
+                    <button onClick={()=>{this.deletejob(x._id)}}>Delete</button></li>)}
+                    {/* Jobs:{this.state.jobs} */}
+                </ul>
+            </div>
+        )
+        else
+        return(
+            <div className='jobs'>
+                <button onClick={()=>{this.props.history.push('/job1add')}}>Get descryption of Images</button>
+                <button onClick={()=>{this.props.history.push('/job1add')}}>Get Images of events</button>
+                <button onClick={()=>{this.props.history.push('/job1add')}}>Annotate and write descyption</button>
+                <h1>Currently no Jobs Assigned </h1>
             </div>
         )
     }

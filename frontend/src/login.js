@@ -20,16 +20,18 @@ class Login extends Component {
   handleSubmit(event) {
     
     
-    const response=axios.post('http://localhost:3001/login', this.state)
+        axios.post('http://localhost:3001/login', this.state)
       .then(response => {
         console.log(response.data)
         if(response.data.status==="201"){
+          window.localStorage.setItem('user_id',response.data.id)
           this.props.history.push('/clientpage')
+          
         }
         if(response.data.status==="200"){
+          window.localStorage.setItem('user_id',response.data.id)
           this.props.history.push('/providerpage')
-          window.localStorage.setItem('id',response.data.id)
-        }
+         }
         if(response.data.status==="400"){
           alert("Email id password not matched")
         }

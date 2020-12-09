@@ -14,17 +14,18 @@ class Clientpage extends Component{
     componentDidMount(){
 
         
-        axios.get('http://localhost:3001/getjobs')
+        axios.get('http://localhost:3001/getalljobs/' + window.localStorage.getItem('user_id'))
         .then(
+            
             response=>{this.setState({jobs:response.data})
-            // console.log(json.data)
+             console.log(response.data)
         }
         )
 
     }
 
     render(){
-        if(this.state.jobs!=null)
+        if(this.state.jobs.length>0)
         return(
             
             <ul>

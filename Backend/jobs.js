@@ -5,6 +5,9 @@ const JobSchema=new mongoose.Schema({
     title:{
       type:String
     },
+    user_id:{
+      type:String
+    },
     jobtype:{
       type:String
     },
@@ -14,9 +17,8 @@ const JobSchema=new mongoose.Schema({
     img:{
       type:String
     },
-    soln:{
-      type:[]
-    }
+    soln: [{user_id:String,answer:String}]
+    
   })
   
 
