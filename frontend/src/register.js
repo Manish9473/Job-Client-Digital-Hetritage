@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 import {BrowserRouter as Router,Switch,Link} from 'react-router-dom';
 import Route from 'react-router-dom/Route';
-import Home from "./home";
+import Home from "./navbar";
 import axios from 'axios'
 
 
@@ -12,7 +12,7 @@ class Register extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {username: '', password: '',email:'',dob:'',gender:'',user_type:''}
+    this.state = {username: '', password: '',email:'',dob:'',gender:'',user_type:'',number:'',education:''}
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -45,7 +45,7 @@ class Register extends Component {
       
         <div className="LoginBox">  
           <h1>Welcome to register</h1>
-          <button onClick={()=> this.props.history.push('/')}>Home</button>
+          
 
           <form onSubmit={this.handleSubmit}>
           <label>
@@ -56,6 +56,11 @@ class Register extends Component {
           <label>
             Email:
             <input type="email" placeholder="Email" onChange= {(event) =>{this.state.email=event.target.value}} required />
+          </label>
+
+          <label>
+            Mobile Number:
+            <input type="Number" placeholder="Number" onChange= {(event) =>{this.state.number=event.target.value}} required />
           </label>
 
           <label>
@@ -83,6 +88,16 @@ class Register extends Component {
                 <input type="radio" value="Client" name="user_type" required/> Client
             </label>
           </div>
+          <label>
+            Education Quallification
+              <select onChange={(event=>{this.state.education=event.target.value})} defaultValue="School" id = "dropdown">
+                
+                <option value="School">School</option>
+                <option value="High School">High School</option>
+                <option value="Graduate">Graduate</option>
+                <option value="Post Graduate">Post Graduate</option>
+              </select>
+          </label>
 
           <input type="submit" value="Submit" />
         </form>

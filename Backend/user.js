@@ -18,6 +18,12 @@ const userSchema=new mongoose.Schema({
     },
     gender:{
       type:String
+    },
+    number:{
+      type:String
+    },
+    education:{
+      type:String
     }
   })
   

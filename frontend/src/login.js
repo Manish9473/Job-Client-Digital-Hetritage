@@ -4,7 +4,7 @@ import {BrowserRouter as Router,Switch,Link} from 'react-router-dom';
 import Route from 'react-router-dom/Route';
 import Register from './register'
 import axios from 'axios'
-
+import Home from "./navbar";
 
 class Login extends Component {
   constructor(props) {
@@ -21,15 +21,17 @@ class Login extends Component {
     
     
         axios.post('http://localhost:3001/login', this.state)
-      .then(response => {
+        .then(response => {
         console.log(response.data)
         if(response.data.status==="201"){
           window.localStorage.setItem('user_id',response.data.id)
+          window.localStorage.setItem('name',response.data.name)
           this.props.history.push('/clientpage')
           
         }
         if(response.data.status==="200"){
           window.localStorage.setItem('user_id',response.data.id)
+          window.localStorage.setItem('name',response.data.name)
           this.props.history.push('/providerpage')
          }
         if(response.data.status==="400"){
@@ -49,13 +51,14 @@ class Login extends Component {
   render(){
     return (
       <form onSubmit={this.handleSubmit}>
+       
         <label>
           Username:
-          <input type="text"  onChange= {(event) =>{this.state.username=event.target.value}} />
+          <input type="text" placeholder='Username' onChange= {(event) =>{this.state.username=event.target.value}} />
         </label>
         <label>
           Password:
-          <input type="password"  onChange={(event) =>{this.state.password=event.target.value}} />
+          <input type="password" placeholder='Password' onChange={(event) =>{this.state.password=event.target.value}} />
         </label>
         <input type="submit" value="Submit" />
       </form>

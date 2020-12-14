@@ -19,9 +19,9 @@ class Job1addpage extends Component{
         data.append('user_id',window.localStorage.getItem('user_id'))
         data.append('title',this.state.title)
         data.append('description',this.state.description)
-        data.append('jobtype','description')
+        data.append('jobtype','Description')
         data.append('image',this.state.img)
-        const res=axios.post('http://localhost:3001/savejob',data)
+        const res=axios.post('http://localhost:3001/savejob1',data)
         .then(()=>this.props.history.push('/providerpage'))
 
         console.log(data)

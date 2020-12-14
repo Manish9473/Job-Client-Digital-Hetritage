@@ -11,8 +11,8 @@ class Providerpage extends Component{
             }
     }
 
-    deletejob(id){
-        axios.post('http://localhost:3001/deletejob/',{'id':id})
+    async deletejob(id){
+        await axios.post('http://localhost:3001/deletejob/',{'id':id})
         .then(this.setState({jobs:[]}))
     }
 
@@ -22,7 +22,7 @@ class Providerpage extends Component{
         axios.get('http://localhost:3001/getjobs/' + window.localStorage.getItem('user_id'))
         .then(
             response=>{this.setState({jobs:response.data})
-            // console.log(json.data)
+             console.log("cdm",response.data)
         }
         )
 
@@ -34,8 +34,8 @@ class Providerpage extends Component{
         return(
             <div className='Jobs'>
                 <button onClick={()=>{this.props.history.push('/job1add')}}>Get descryption of Images</button>
-                <button onClick={()=>{this.props.history.push('/job1add')}}>Get Images of events</button>
-                <button onClick={()=>{this.props.history.push('/job1add')}}>Annotate and write descyption</button>
+                <button onClick={()=>{this.props.history.push('/job2add')}}>Get Images</button>
+                <button onClick={()=>{this.props.history.push('/job1add')}}>Annotate Images</button>
                 
                 <h1>Jobs are</h1>
                 <ul>
@@ -50,7 +50,7 @@ class Providerpage extends Component{
         return(
             <div className='jobs'>
                 <button onClick={()=>{this.props.history.push('/job1add')}}>Get descryption of Images</button>
-                <button onClick={()=>{this.props.history.push('/job1add')}}>Get Images of events</button>
+                <button onClick={()=>{this.props.history.push('/job2add')}}>Get Images of events</button>
                 <button onClick={()=>{this.props.history.push('/job1add')}}>Annotate and write descyption</button>
                 <h1>Currently no Jobs Assigned </h1>
             </div>

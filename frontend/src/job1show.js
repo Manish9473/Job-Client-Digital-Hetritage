@@ -14,7 +14,7 @@ class Job1page extends Component{
         this.soln={
             job_id:props.location.state.id,
             user_id:window.localStorage.getItem('user_id'),
-            answer:'argvdbdg'
+            answer:''
         }
     }
 

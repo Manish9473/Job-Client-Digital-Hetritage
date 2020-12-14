@@ -1,24 +1,20 @@
 import React, {Component} from 'react';
 import './home.css';
-import {BrowserRouter as Router,Switch,Link} from 'react-router-dom';
-import Route from 'react-router-dom/Route';
-import Login from "./login"
-import Register from './register'
-class Home extends Component {
 
+class Home extends Component {
+  constructor(props)
+  {
+    super(props)
+  }
   render(){
     return (
-      <Router>
-        <h1>Home</h1>
-        
-        
-        <button onClick={()=> this.props.history.push('/register')}>Register</button>
-        <button onClick={()=> this.props.history.push('/login')}>Login</button>
-        <button >Admin</button>
-        
-      </Router>
-    );
-  }
+
+        <div className="Home">
+           <h1>THIS IS HOME PAGE wRITE ARTIVLE</h1>
+        </div>
+    )
+  
+   }
 }
 
 export default Home;

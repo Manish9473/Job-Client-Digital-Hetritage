@@ -7,8 +7,16 @@ class Clientpage extends Component{
     constructor(props)
     {   super(props);
          this.state={
-            jobs:[]
+            newjobs:[],
+            oldjobs:[]
             }
+    }
+
+    handleRoute(x)
+    {   if(x.jobtype=='Description')
+        this.props.history.push('/job1page',{id:x._id,title:x.title,img:x.img,description:x.description})
+        if(x.jobtype=='Add Images')
+        this.props.history.push('/job2page',{id:x._id,title:x.title,description:x.description})
     }
 
     componentDidMount(){
@@ -17,7 +25,7 @@ class Clientpage extends Component{
         axios.get('http://localhost:3001/getalljobs/' + window.localStorage.getItem('user_id'))
         .then(
             
-            response=>{this.setState({jobs:response.data})
+            response=>{this.setState({newjobs:response.data.new,oldjobs:response.data.old})
              console.log(response.data)
         }
         )
@@ -25,13 +33,24 @@ class Clientpage extends Component{
     }
 
     render(){
-        if(this.state.jobs.length>0)
+        if(this.state.newjobs.length>0||this.state.oldjobs.length>0)
         return(
-            
-            <ul>
-                {this.state.jobs.map(x => <li>Title:{x.title} Jobtype:{x.jobtype}<button onClick={()=>this.props.history.push('/jobpage',{id:x._id,title:x.title,img:x.img,description:x.description})}>Open</button></li>)}
-                {/* Jobs:{this.state.jobs} */}
-            </ul>
+            <div className="Jobs">
+                <div className='NewJobs'>
+                    <h2>New Jobs</h2>
+                    <ul>
+                        {this.state.newjobs.map(x => <li>Title:{x.title} Jobtype:{x.jobtype}<button onClick={()=> this.handleRoute(x)}>Open</button></li>)}
+                        {/* Jobs:{this.state.jobs} */}
+                    </ul>
+                </div>
+                <div className='OldJobs'>
+                    <h2>Completed Jobs</h2>
+                    <ul>
+                        {this.state.oldjobs.map(x => <li>Title:{x.title} Jobtype:{x.jobtype}<button onClick={()=> this.handleRoute(x)}>Open</button></li>)}
+                        {/* Jobs:{this.state.jobs} */}
+                    </ul>
+                </div>
+            </div>
         )
         else
         return(

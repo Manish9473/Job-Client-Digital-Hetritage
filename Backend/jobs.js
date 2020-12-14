@@ -1,4 +1,4 @@
-const { Int32 } = require('mongodb')
+
 const mongoose=require('mongoose')
 
 const JobSchema=new mongoose.Schema({
@@ -17,7 +17,7 @@ const JobSchema=new mongoose.Schema({
     img:{
       type:String
     },
-    soln: [{user_id:String,answer:String}]
+    soln: [{user_id:String,answer:String,image:[]}]
     
   })
   
