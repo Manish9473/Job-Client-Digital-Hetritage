@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './App.css';
+import './clientpage.css';
 import axios from 'axios'
 
 
@@ -36,6 +36,7 @@ class Clientpage extends Component{
         if(this.state.newjobs.length>0||this.state.oldjobs.length>0)
         return(
             <div className="Jobs">
+                
                 <div className='NewJobs'>
                     <h2>New Jobs</h2>
                     <ul>
@@ -45,10 +46,10 @@ class Clientpage extends Component{
                 </div>
                 <div className='OldJobs'>
                     <h2>Completed Jobs</h2>
-                    <ul>
-                        {this.state.oldjobs.map(x => <li>Title:{x.title} Jobtype:{x.jobtype}<button onClick={()=> this.handleRoute(x)}>Open</button></li>)}
+                    <table>
+                        {this.state.oldjobs.map(x => <tr><td>Title:{x.title}</td> <td>Jobtype:{x.jobtype} </td> <td><button onClick={()=> this.handleRoute(x)}>Open</button></td></tr>)}
                         {/* Jobs:{this.state.jobs} */}
-                    </ul>
+                    </table>
                 </div>
             </div>
         )

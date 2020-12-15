@@ -13,7 +13,20 @@ class Providerpage extends Component{
 
     async deletejob(id){
         await axios.post('http://localhost:3001/deletejob/',{'id':id})
-        .then(this.setState({jobs:[]}))
+        await axios.get('http://localhost:3001/getjobs/' + window.localStorage.getItem('user_id'))
+        .then(
+            response=>{this.setState({jobs:response.data})
+             console.log("cdm",response.data)
+        }
+        )
+        
+    }
+
+    handleRoute(x)
+    {   if(x.jobtype=='Description')
+        this.props.history.push('/job1soln',{soln:x.soln})
+        if(x.jobtype=='Add Images')
+        this.props.history.push('/job2soln',{soln:x.soln})
     }
 
     componentDidMount(){
@@ -40,9 +53,9 @@ class Providerpage extends Component{
                 <h1>Jobs are</h1>
                 <ul>
                     {this.state.jobs.map(x => <li>Title:{x.title} Jobtype:{x.jobtype}
-                    <button onClick={()=>this.props.history.push('/job1soln',{soln:x.soln})}>Solutions</button> 
+                    <button onClick={()=>this.handleRoute(x)}>Solutions</button> 
                     <button onClick={()=>{this.deletejob(x._id)}}>Delete</button></li>)}
-                    {/* Jobs:{this.state.jobs} */}
+                    
                 </ul>
             </div>
         )

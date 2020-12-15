@@ -19,7 +19,7 @@ class Job1page extends Component{
     }
 
     handlesubmit(){
-        axios.post('http://localhost:3001/savesoln1',this.soln)
+        axios.post('http://localhost:3001/savesoln',this.soln)
         .then(()=>{this.props.history.push('/clientpage')})
     }
 
