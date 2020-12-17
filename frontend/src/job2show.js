@@ -20,6 +20,7 @@ class Job2page extends Component{
         const data= new FormData()
         data.append('job_id',this.state.job_id)
         data.append('user_id',this.state.user_id)
+        
         for(var i=0;i<this.state.img.length;i++)
         data.append('images',this.state.img[i])
         
@@ -42,8 +43,6 @@ class Job2page extends Component{
                 <h1>Title:{this.state.job_title}</h1>
                 <h2>Descryption:{this.state.job_descryption}</h2>
                 <input type="file" accept="image/x-png,image/gif,image/jpeg" onChange = {(event)=>{this.handleEvent(event)}} multiple/>
-                {console.log("img",this.state.img)}
-                {console.log(this.state.img)}
                 <ul>
                     {
                     this.state.img.map(x=><li>{x.name}</li>)
