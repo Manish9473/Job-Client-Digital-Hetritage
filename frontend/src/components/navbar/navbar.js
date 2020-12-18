@@ -47,7 +47,7 @@ class Navbar extends Component {
           <button onClick={()=> this.props.history.push('/register')}>Register</button>
           <button onClick={()=> this.handlelogin()} >{this.state.log_state}</button>
           <button onClick={()=> this.props.history.push('./')}>Home</button>
-          <button onClick={()=> this.handlelogin()}>Admin</button>
+          <button onClick={()=> this.props.history.push('/login')}>Admin</button>
         </div>
     )
   

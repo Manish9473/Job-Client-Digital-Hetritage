@@ -51,6 +51,7 @@ class Login extends Component {
 
 
   render(){
+    if(window.localStorage.getItem('user_id')=='')
     return (
       <form onSubmit={this.handleSubmit}>
        
@@ -65,6 +66,10 @@ class Login extends Component {
         <input type="submit" value="Submit" />
       </form>
     );
+    else
+    return(
+      <h1>You are already logged in Please logout</h1>
+    )
   }
 }
 

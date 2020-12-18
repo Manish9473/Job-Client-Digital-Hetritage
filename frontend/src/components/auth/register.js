@@ -38,6 +38,7 @@ class Register extends Component {
 }
 
   render(){
+    if(window.localStorage.getItem('user_id')=='')
     return (
       
         <div className="LoginBox">  
@@ -102,6 +103,10 @@ class Register extends Component {
         
       </div>
     );
+    else
+    return(
+      <h1>You are already Logged in</h1>
+    )
   }
 }
 
