@@ -26,27 +26,23 @@ class Job2addpage extends Component{
     render(){
         
         return(
-            <div className="Add Job">
-                <h1>Add a Job</h1>
+            <div className="AddJob">
+                {/* <img src="/lhc.jpeg" id="bg-img"/> */}
+                <div className="wrapper">
+                <h4 >Add a Job</h4>
                 <label>
-                    Title
+                    <h4>Title</h4>
                 <input type="text" value={this.state.title} onChange = {(event)=>{this.setState({title:event.target.value})}}/>
                 </label>
                 <label>
-                    Give Description of Images that you want
-                     <textarea value={this.state.description} onChange = {(event)=>{this.setState({description:event.target.value})}} width="400" height="200"></textarea>
+                    <h4>Give Description of Images that you want</h4>
+                     <textarea id="input" value={this.state.description} onChange = {(event)=>{this.setState({description:event.target.value})}} width="400" height="200"></textarea>
                 </label>
-                {/* <label>
-                    Image upload
-                <input type="file" accept="image/x-png,image/gif,image/jpeg" onChange = {(event)=>{this.setState({img:event.target.files[0]})
-                 if(event.target.files!=null)
-                 this.img_src=URL.createObjectURL(event.target.files[0])}}/>
-                <img src={this.img_src} width="500" height="600"></img>
-                </label> */}
                 <label>
-                    Submit
-                    <button on onClick={this.handlesubmit.bind(this)}>Submit</button>
+                <h4>Submit</h4>
+                    <button id="btn" on onClick={this.handlesubmit.bind(this)}>Post Job</button>
                 </label>
+                </div>
                 
             </div>
         )

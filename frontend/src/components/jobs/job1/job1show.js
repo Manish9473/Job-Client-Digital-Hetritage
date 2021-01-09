@@ -1,4 +1,5 @@
 import axios from 'axios';
+import '../job.css';
 import React, {Component} from 'react';
 
 class Job1page extends Component{
@@ -25,15 +26,22 @@ class Job1page extends Component{
 
     render(){
         return(
-            <div className='Job'>
-                <h1>Title:{this.state.job_title}</h1>
-                <p>Descryption:{this.state.job_descryption}</p>
-                <img src={'http://localhost:3001/getimage/'+this.state.job_img} height='600' width='500'></img>
+            <div className="ShowJob">
+                {/* <img src="/lhc.jpeg" id="bg-img"/> */}
+                <div className="wrapper">
+                <h4>Title: {this.state.job_title}</h4>
+                <h4>Description:{this.state.job_descryption}</h4>
                 <label>
-                    Solution:
-                    <textarea onChange={event=>{this.soln.answer=event.target.value}}>Write your solution</textarea>
+                   <h4>Solution:</h4> 
+                    <textarea id="input" onChange={event=>{this.soln.answer=event.target.value}} placeholder="Write your solution"></textarea>
                 </label>
-                <button onClick={event=>{this.handlesubmit()}}>Submit Job</button>
+                <br></br>
+                <button id="btn" onClick={event=>{this.handlesubmit()}}>Submit Job</button>
+                
+                
+                
+                </div>
+                <img className="Image" src={'http://localhost:3001/getimage/'+this.state.job_img} height='500' width='400'></img>
 
             </div>
         )

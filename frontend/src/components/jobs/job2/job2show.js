@@ -1,4 +1,5 @@
 import axios from 'axios';
+import '../job.css';
 import React, {Component} from 'react';
 
 class Job2page extends Component{
@@ -38,9 +39,11 @@ class Job2page extends Component{
     }
     render(){
         return(
-            <div className='Job'>
-                <h1>Title:{this.state.job_title}</h1>
-                <h2>Descryption:{this.state.job_descryption}</h2>
+            <div className='ShowJob'>
+                {/* <img src="/lhc.jpeg" id="bg-img"/> */}
+                <div className="wrapper">
+                <h4>Title: {this.state.job_title}</h4>
+                <h4>Description: {this.state.job_descryption}</h4>
                 <input type="file" accept="image/x-png,image/gif,image/jpeg" onChange = {(event)=>{this.handleEvent(event)}} multiple/>
                 {console.log("img",this.state.img)}
                 {console.log(this.state.img)}
@@ -49,7 +52,8 @@ class Job2page extends Component{
                     this.state.img.map(x=><li>{x.name}</li>)
                     }   
                 </ul>
-                <button onClick={event=>{this.handlesubmit()}}>Submit Job</button>
+                <button id="btn" onClick={event=>{this.handlesubmit()}}>Submit Job</button>
+                </div>
 
             </div>
         )

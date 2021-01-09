@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import '../job.css';
 import axios from 'axios'
 
 class Job1soln extends Component{
@@ -15,7 +16,8 @@ class Job1soln extends Component{
         axios.get('http://localhost:3001/userdetails/'+id)
         .then(response=>{
             
-            alert('Name='+response.data.name+'\nEmail='+response.data.email+'\nMobile Number='+response.data.number)
+            this.props.history.push('/usercontact',{name:response.data.name,email:response.data.email,mob:response.data.number})
+            
         })
 
 
@@ -24,10 +26,21 @@ class Job1soln extends Component{
     render(){
         if(this.state.job_soln.length){
             return(
-                
-                <table>
-                    {this.state.job_soln.map(x=><tr><td>Answer:{x.answer}</td> <td>< button onClick={()=>{this.promptdetails(x.user_id)}} >Get Client Details</button></td></tr>)}
+                <div className="table-wrapper">
+
+                <table className="fl-table">
+                    <thead>
+                        <th>SOLUTION</th>
+                        <th>User Details</th>
+                    </thead>
+                    {this.state.job_soln.map(x=>
+                    <tr>
+                    <td>{x.answer}</td> 
+                    <td>< button id="btn" onClick={()=>{this.promptdetails(x.user_id)}} >Client Details</button></td>
+                    </tr>)}
                 </table>
+
+                </div>
             )
         }
         else{

@@ -3,14 +3,15 @@ import './userpage.css';
 import axios from 'axios'
 
 
-class Providerpage extends Component{
+class Alljobs extends Component{
     constructor(props)
     {   super(props);
          this.state={
-            jobs:[],
-            job_types:[]
+            jobs:props.location.state.alljobs,
+            
             };
-        this.jobs=[]
+        this.jobs=this.state.jobs
+        
     }
 
     async deletejob(id){
@@ -61,39 +62,16 @@ class Providerpage extends Component{
     }
 
 
-    componentDidMount(){
-
-        
-        axios.get('http://localhost:3001/getjobs/' + window.localStorage.getItem('user_id'))
-        .then(
-            response=>{
-                this.jobs=response.data
-                this.setState({jobs:response.data})
-             
-        }
-        )
-        axios.get('http://localhost:3001/getjobtype')
-        .then((response)=>{this.setState({job_types:response.data})})
-
-    }
-
+    
     render(){
         var h1="No Job Found"
         if(this.state.jobs.length>0)
-            h1="JOBS POSTED"
+            h1="ALL JOBS"
         return(
             <div className='Jobs'>
                  <img src="/entrance.jpeg" id="bg-img"/> 
                  
-                 <div className="Addjobtype">
                  
-                <select onChange={(event)=>{this.props.history.push(event.target.value)}} defaultValue="/job1add" id = "dropdown">
-                    <option>Add New Job</option>
-                    {this.state.job_types.map(x=>
-                        <option value={x.route}>{x.title}</option>
-                        )}
-                </select>
-                 </div>
                  
 
                 <h2>{h1}</h2>
@@ -131,4 +109,4 @@ class Providerpage extends Component{
     }
 }
 
-export default Providerpage;
+export default Alljobs;

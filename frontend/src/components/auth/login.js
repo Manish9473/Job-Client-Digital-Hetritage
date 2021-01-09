@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import './Sign-in-up.css';
 import axios from 'axios'
 
 
@@ -53,6 +53,14 @@ class Login extends Component {
   render(){
     if(window.localStorage.getItem('user_id')=='')
     return (
+      <div class="Loginparent">
+      <div class="form-modal">
+        
+            <div class="form">
+              <button id="login-toggle">Login Here</button>
+            </div>
+      
+      <div id="login-form">
       <form onSubmit={this.handleSubmit}>
        
         <label>
@@ -63,13 +71,18 @@ class Login extends Component {
           Password:
           <input type="password" placeholder='Password' onChange={(event) =>{this.state.password=event.target.value}} />
         </label>
-        <input type="submit" value="Submit" />
+        <input type="submit" className="btn login" value="Submit" />
       </form>
+      </div>
+
+      </div>
+    </div>
     );
     else
     return(
-      <h1>You are already logged in Please logout</h1>
+      <h2>You are already logged in! Please logout.</h2>
     )
+  
   }
 }
 

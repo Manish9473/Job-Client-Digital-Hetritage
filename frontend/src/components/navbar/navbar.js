@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './home.css';
+import './navbar.css';
 
 class Navbar extends Component {
   constructor(props)
@@ -37,18 +37,30 @@ class Navbar extends Component {
       this.setState({log_state:'Login',log_name:''})
     }
   }
+
+
+
   render(){
     return (
 
-        <div className="Navbar">
-          <div className='Welcome'>
-            {this.state.log_name}
-          </div>
-          <button onClick={()=> this.props.history.push('/register')}>Register</button>
-          <button onClick={()=> this.handlelogin()} >{this.state.log_state}</button>
-          <button onClick={()=> this.props.history.push('./')}>Home</button>
-          <button onClick={()=> this.props.history.push('/login')}>Admin</button>
+      <div className="Navbar Navbar-expand-lg">
+      <nav className="navbar navbar-expand-lg navbar-dark ">
+      <img src="/roundlogo.jpg" width="50"  height="50" class=" logo d-inline-block align-left" alt=""/> 
+          <h3>DIGITAL HERITAGE </h3>
+        
+        
+        <div className="navbar-nav collapse navbar-collapse " id="navbarNavDropdown">
+          <button className="nav-item" onClick={()=> this.props.history.push('./')}>Home</button>
+          <button className="nav-item" onClick={()=> this.props.history.push('/register')}>Register</button>
+          <button className="nav-item" onClick={()=> this.handlelogin()} >{this.state.log_state}</button>
+          <button className="nav-item" onClick={()=> this.props.history.push('/login')}>Admin</button>
         </div>
+      </nav>
+
+      <div className='Welcome'>
+        {this.state.log_name}
+      </div>
+    </div>
     )
   
    }
